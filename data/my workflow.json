@@ -1,0 +1,710 @@
+{
+  "name": "my workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        96
+      ],
+      "id": "f8d83936-7aef-4766-b7ae-81bd71be4a94"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 50000,
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        656
+      ],
+      "id": "9698b1eb-f347-4a62-8c24-822b2e67f529",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Rj4GQcdk7AosZQ35",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "[\n    {\n      \"schema_name\": \"string\",\n      \"table_name\": \"string\",\n      \"table_type\": \"dim|fact|unknown\",\n      \"main_category\": \"string\",\n      \"sub_category_1\": \"string\",\n      \"sub_category_2\": \"string\",\n      \"grain\": \"string\",\n      \"key_columns\": [\"string\", \"...\"],\n      \"relationship_hints\": [\"string\", \"...\"],\n      \"summary\": \"string\"\n  }\n]"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        160,
+        656
+      ],
+      "id": "5ccf17ac-a650-4b6b-9ff3-9d5375be7d09",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1pbm1ETMzlbgotXAsbhtc9Gz9IGlPs3zKM7tRh6m7x0M/edit?gid=1270378987#gid=1270378987",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2038885775,
+          "mode": "list",
+          "cachedResultName": "n8n-sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pbm1ETMzlbgotXAsbhtc9Gz9IGlPs3zKM7tRh6m7x0M/edit#gid=2038885775"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "schema_name",
+              "displayName": "schema_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "table_name",
+              "displayName": "table_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "table_type",
+              "displayName": "table_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "main_category",
+              "displayName": "main_category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sub_category_1",
+              "displayName": "sub_category_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sub_category_2",
+              "displayName": "sub_category_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "relationship_hints",
+              "displayName": "relationship_hints",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "key_columns",
+              "displayName": "key_columns",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "output",
+              "displayName": "output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "grain",
+              "displayName": "grain",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        880,
+        672
+      ],
+      "id": "b751fb15-ad26-4400-ba12-129d5c52f930",
+      "name": "Append row in sheet",
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleApi": {
+          "id": "bfac8jRpj3YFaYdy",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        624,
+        672
+      ],
+      "id": "8dc8f240-ae83-4499-b479-c1a63a05349e",
+      "name": "Split Out",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "JSON from File",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        96
+      ],
+      "id": "dca1bb8a-1cb6-4e0a-b230-f979e0c19ce3"
+    },
+    {
+      "parameters": {
+        "filePath": "/home/node/.n8n/.src/1_table_metadata_short.json"
+      },
+      "name": "Read Local File",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        96
+      ],
+      "id": "924678b2-4933-4333-80fd-1e25c89aec82"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 50000,
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        400,
+        416
+      ],
+      "id": "b48048f8-31fe-40f6-8208-38b67ecaa17b",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Rj4GQcdk7AosZQ35",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"relationships\": [\n    {\n      \"name\": \"string\",\n      \"fromTable\": \"schema.table\",\n      \"fromColumn\": \"string or [string, ...]\",\n      \"toTable\": \"schema.table\",\n      \"toColumn\": \"string or [string, ...]\",\n      \"relationship\": \"manyToOne\",\n      \"relationship_describe\": \"Join schema.from.col to schema.to.col to link the X to Y.\",\n      \"confidence\": 0.0,\n      \"evidence\": [\"string\"]\n    }\n  ]\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        400
+      ],
+      "id": "91a435fa-0f77-4d50-9be1-f9cf2721e932",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 50000,
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        272
+      ],
+      "id": "ba248582-de78-4921-80b3-baf008c26351",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Rj4GQcdk7AosZQ35",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=SYSTEM\nYou are a data modeling analyst. Infer foreign-key style relationships between tables from tabular metadata. Be precise and conservative. Prefer evidence-based matches from names, key patterns, and descriptions. Include nested/struct paths (dot-paths) when relevant.\n\nUSER\nYou will receive a json metadata with below info:\n- schema_name\n- table_name\n- table_type (e.g., fact, dimension, unknown)\n- main_category, sub_category_1, sub_category_2\n- key_columns: array of likely key columns within the table (may include dot-paths for nested/struct/json fields like user_data.uuid, data.url)\n- relationship_hints: array of likely related entities or table-name stems (optional)\n- summary/description (free text)\n\nGoal: Infer likely inter-table relationships across all tables. Return ONLY a JSON object with:\n\n{\n  \"relationships\": [\n    {\n      \"name\": \"string\",\n      \"fromTable\": \"schema.table\",\n      \"fromColumn\": \"string or [string, ...]\",\n      \"toTable\": \"schema.table\",\n      \"toColumn\": \"string or [string, ...]\",\n      \"relationship\": \"manyToOne\",\n      \"relationship_describe\": \"Join schema.from.col to schema.to.col to link the X to Y.\",\n      \"confidence\": 0.0,\n      \"evidence\": [\"string\"]\n    }\n  ]\n}\n\nRules and heuristics:\n- Keys\n  - Primary candidates: \"id\", \"<entity>_id\", \"<table_singular>_id\", \"uuid\"; natural keys like \"email\", \"iso_code\", \"sku\".\n  - Composites: sensible pairs like (\"order_id\",\"line_number\").\n  - Include nested/struct/json fields via dot notation when implied (e.g., \"user_data.uuid\", \"payload.user.id\", \"data.url\").\n- Matching\n  - Exact column matches (user_id ↔ id), stem/pluralization (product_id ↔ products.id), common aliases (\"account\" ↔ \"accounts\").\n  - Use relationship_hints as soft signals; prefer tables present in metadata.\n- Direction\n  - Prefer fact/event → dimension/reference as manyToOne.\n  - Dimensions with shared natural keys may be oneToOne (lower confidence if unsure).\n- Imperative description\n  - relationship_describe must use this pattern:\n    - \"Join <fromTable>.<fromColumn> to <toTable>.<toColumn> to link the <business meaning>.\"\n- Be conservative\n  - If multiple candidates, pick the strongest; note alternates in evidence.\n  - Lower confidence with weak/partial signals.\n\nOutput constraints:\n- Return only the JSON object with the \"relationships\" array, no extra text.\n- Use schema prefixes when available (e.g., \"sandbox_datalake.page_view\").\n\nNow analyze this metadata and produce the relationships JSON:\n{{ $json.ouput || JSON.stringify($json) }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        176
+      ],
+      "id": "a4876146-52db-4734-9a0a-5e013af9e1ed",
+      "name": "Relationship agent",
+      "executeOnce": true,
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=SYSTEM\nYou are a data catalog analyst. Infer table semantics from names and column metadata. Be pragmatic, precise, and consistent. Prefer deterministic, schema-consistent outputs. When uncertain, make the best reasonable guess and lower confidence.\n\nUSER\nYou will receive a JSON array with one or more catalog objects produced by a CSV of warehouse metadata. Structure:\n- catalog_name: string\n- schemas: array of:\n  - schema_name: string\n  - tables: array of:\n    - table_name: string\n    - column_info: array of:\n      - column_name: string\n      - dtype: string\n      - description: string (may be empty)\n\nTask:\nFor every table, produce one summary object with:\n- schema_name: string\n- table_name: string\n- table_type: string (one of: \"dim\", \"fact\",\"unknown\")\n- main_category: string (coarse business domain; keep broad for compatibility)\n- sub_category_1: string (narrower topic within the domain)\n- sub_category_2: string (even narrower/theme; can be empty if N/A)\n- entity: string (primary business entity, e.g., \"Order\", \"User\", \"Product\", \"Invoice\", \"Event\")\n- grain: string (row-level granularity, e.g., \"one row per order\", \"per order item\", \"per user per day\")\n- key_columns: array of strings with likely primary/foreign keys. Match patterns like id, <entity>_id, uuid, email, natural keys. Include only columns/fields present in the table. Support nested paths (e.g., data.user_id, payload.account.id). Allow composites when obvious (e.g., order_id + line_number).\n\n- summary: 1-3 sentences describing the table’s purpose based on name/columns/descriptions.\n\nHeuristics:\n- Keys: Prefer columns named exactly \"id\" as primary keys; then \"<entity>_id\", \"<table_singular>_id\", \"uuid\". Treat natural keys when obvious (e.g., \"email\", \"iso_code\"). Consider composites when both parts are present and sensible (e.g., \"order_id\" + \"line_number\").\n- Relationship hints: If \"user_id\", relate to \"users\" domain; if \"account_id\", \"email\", \"product_id\", \"ticket_id\", etc., infer corresponding entities.\n- Categories: Use table/schema names first; then column names and descriptions. If prefix/suffix indicates layer (\"stg_\", \"raw_\", \"ods_\", \"dim_\", \"fact_\"), prefer lifecycle/data_model_role accordingly.\n- Table type: Infer from naming conventions like \"vw_\", \"_view\", \"mv_\", \"materialized\". If none, \"unknown\".\n- Be conservative: If not enough signal, choose \"unknown\" or leave sub_category_2 empty and lower confidence.\n\nOutput format:\nReturn a JSON array that include all the tables in the json. Each element strictly follows this JSON schema:\n\n[\n  {\n      \"schema_name\": \"string\",\n      \"table_name\": \"string\",\n      \"table_type\": \"dim|fact|unknown\",\n      \"main_category\": \"string\",\n      \"sub_category_1\": \"string\",\n      \"sub_category_2\": \"string\",\n      \"grain\": \"string\",\n      \"key_columns\": [\"string\", \"...\"],\n      \"relationship_hints\": [\"string\", \"...\"],\n      \"summary\": \"string\"\n  }\n]\nNow process this catalog input and produce the array:\nNow process this catalog input and produce the array:\n{{ $json.data || JSON.stringify($json) }}",
+        "hasOutputParser": true,
+        "options": {
+          "enableStreaming": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -32,
+        416
+      ],
+      "id": "eb95833e-b859-4475-bf8b-59f02c1443f2",
+      "name": "Catalog agent",
+      "retryOnFail": false,
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e79ef916-865a-463c-90e5-b8d46935492f",
+              "name": "table",
+              "value": "={{ $('JSON from File').item.json['0'].schemas[0].tables }}",
+              "type": "array"
+            },
+            {
+              "id": "ae4499b7-e627-4f54-8ba9-e9adb98e88d2",
+              "name": "relationship",
+              "value": "={{ $json.output.relationships }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        768,
+        112
+      ],
+      "id": "2c91e0d9-2dd4-4096-9dc3-4c548010804a",
+      "name": "Full Model",
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "[\n  {\n    \"no\": 1,\n    \"question\": \"A plain English business question\",\n    \"tables\": \"table1, table2\",\n    \"query\": \"SELECT ...\"\n  }\n]"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1152,
+        272
+      ],
+      "id": "500a9fc0-557f-428e-b2d5-b8e89be64107",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        96
+      ],
+      "id": "9c3713f4-4e4c-4001-8ef5-9cbc50528c20",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=### Prompt you can paste into your AI\n\n```text\nSYSTEM\nYou are a BI analyst. Given a warehouse data model and join relationships, propose 5 simple, high-value business questions and write a correct SQL query for each one. Keep questions “easy” (counts, top-N, trends, simple breakdowns) and grounded strictly in the provided schema and relationships.\n\nCONTEXT\nWarehouse dialect: BigQuery\nDefault time grain: daily if a date is present.\nOnly use tables/columns that exist in the input.\nUse joins exactly as specified by the relationships.\n\nTABLE METADATA (sample rows/columns, role, keys, summaries):\n{{ JSON.stringify ($json.table) }}\n\nRELATIONSHIPS:\n{{ JSON.stringify ($json.relationship) }}\n\nExample item:\n{\n  \"name\": \"bingads_performance_ads_to_dim_bingads_ads\",\n  \"fromTable\": \"sandbox_datalake.bingads_performance_ads\",\n  \"fromColumn\": \"ad_id\",\n  \"toTable\": \"sandbox_datalake.dim_bingads_ads\",\n  \"toColumn\": \"id\",\n  \"relationship\": \"manyToOne\",\n  \"relationship_describe\": \"Join sandbox_datalake.bingads_performance_ads.ad_id to sandbox_datalake.dim_bingads_ads.id to link the ad performance to ad details.\",\n  \"confidence\": 1\n}\n\nREQUIREMENTS\n- Propose exactly 5 questions. Make them easy and useful to business stakeholders.\n- For each question, provide:\n  - Which tables are used and why (1 short line).\n  - A single SQL query (valid <SQL_DIALECT>).\n- Prefer fact → dimension joins following provided relationships.\n- Use safe aggregations and clear column aliases.\n- If a date column exists, include a WHERE or GROUP BY date for trend questions.\n- Do not invent columns. Only use columns referenced in the metadata.\n- If uncertain, pick the most conservative, obvious option.\n\nOUTPUT FORMAT (strict)\n[\n  {\n    \"no\": 1,\n    \"question\": \"A plain English business question\",\n    \"tables\": \"table1, table2\",\n    \"query\": \"SELECT ...\"\n  }\n]",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1008,
+        96
+      ],
+      "id": "f5606ada-5e9a-4c18-9b20-ea2583101b72",
+      "name": "golden query",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pbm1ETMzlbgotXAsbhtc9Gz9IGlPs3zKM7tRh6m7x0M",
+          "mode": "list",
+          "cachedResultName": "de_columns_sandbox_datalake",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pbm1ETMzlbgotXAsbhtc9Gz9IGlPs3zKM7tRh6m7x0M/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1605360245,
+          "mode": "list",
+          "cachedResultName": "golden query",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pbm1ETMzlbgotXAsbhtc9Gz9IGlPs3zKM7tRh6m7x0M/edit#gid=1605360245"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "no",
+              "displayName": "no",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "question",
+              "displayName": "question",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tables",
+              "displayName": "tables",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1552,
+        96
+      ],
+      "id": "74974660-1d27-4c11-87bf-ec8c038c0c7d",
+      "name": "write to gsheet",
+      "credentials": {
+        "googleApi": {
+          "id": "bfac8jRpj3YFaYdy",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxOutputTokens": 20000,
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        528,
+        560
+      ],
+      "id": "3fe38e34-ee1a-405b-b748-5acbe384024a",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Rj4GQcdk7AosZQ35",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Read Local File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Catalog agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Catalog agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "JSON from File": {
+      "main": [
+        [
+          {
+            "node": "Catalog agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Local File": {
+      "main": [
+        [
+          {
+            "node": "JSON from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Relationship agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Relationship agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "golden query",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Relationship agent": {
+      "main": [
+        [
+          {
+            "node": "Full Model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Catalog agent": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Relationship agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Full Model": {
+      "main": [
+        [
+          {
+            "node": "golden query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser2": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "golden query",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "write to gsheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "golden query": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2babe8a5-0697-4dcf-b9b7-b70f59ac30f4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "id": "LmrxxzrTkgZZrGJH",
+  "tags": []
+}
