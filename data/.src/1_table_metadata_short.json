@@ -1,0 +1,1081 @@
+[
+    {
+      "catalog_name": "SANDBOX_DATALAKE",
+      "schemas": [
+        {
+          "schema_name": "sandbox_datalake",
+          "tables": [
+            {
+              "table_name": "assignment_term_area_changed",
+              "column_info": [
+                {
+                  "column_name": "event_uuid",
+                  "dtype": "string",
+                  "description": "Unique identifier (UUID) for the event."
+                },
+                {
+                  "column_name": "event_kafka_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when the event message was produced to Kafka."
+                },
+                {
+                  "column_name": "event_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp recorded by the event source indicating when the event occurred."
+                },
+                {
+                  "column_name": "product_uuid",
+                  "dtype": "string",
+                  "description": "UUID of the product related to the assignment term change."
+                },
+                {
+                  "column_name": "vendor_uuid",
+                  "dtype": "string",
+                  "description": "UUID of the vendor related to the assignment term change."
+                },
+                {
+                  "column_name": "_meta",
+                  "dtype": "struct<event_uuid:string,event_time:string,application:string,origin:string,experiments:array<struct<id:string,variant:string>>,client_info:struct<asn:string,country:string,region:string,city:string,postal_code:string,latitude:string,longitude:string,ja4_fingerprint:string,is_desktop_viewer:boolean,is_mobile_viewer:boolean,is_smarttv_viewer:boolean,is_tablet_viewer:boolean,is_android_viewer:boolean,is_ios_viewer:boolean>,user:struct<uuid:string,roles:array<string>>>",
+                  "description": "Nested event metadata including client details and user information; may contain personal data such as user UUID and location."
+                },
+                {
+                  "column_name": "assignment_term_id",
+                  "dtype": "bigint",
+                  "description": "Internal numeric identifier of the assignment term affected by the change."
+                }
+              ]
+            },
+            {
+              "table_name": "assignment_term_change_request_created",
+              "column_info": [
+                {
+                  "column_name": "_meta",
+                  "dtype": "struct<event_uuid:string,event_time:string,application:string,origin:string,experiments:array<struct<id:string,variant:string>>,client_info:struct<asn:string,country:string,region:string,city:string,postal_code:string,latitude:string,longitude:string,ja4_fingerprint:string,is_desktop_viewer:boolean,is_mobile_viewer:boolean,is_smarttv_viewer:boolean,is_tablet_viewer:boolean,is_android_viewer:boolean,is_ios_viewer:boolean>,user:struct<uuid:string,roles:array<string>>>",
+                  "description": "Structured event metadata including event UUID, timestamps, client location/device info, experiments, and embedded user info (uuid and roles)."
+                },
+                {
+                  "column_name": "event_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp of the event occurrence as recorded in the payload."
+                },
+                {
+                  "column_name": "change_request_id",
+                  "dtype": "bigint",
+                  "description": "Unique numeric identifier for the change request."
+                },
+                {
+                  "column_name": "requested_by",
+                  "dtype": "string",
+                  "description": "Identifier or display name of the user who requested the change."
+                },
+                {
+                  "column_name": "event_uuid",
+                  "dtype": "string",
+                  "description": "Unique UUID identifying the originating event."
+                },
+                {
+                  "column_name": "assignment_term_id",
+                  "dtype": "bigint",
+                  "description": "Identifier of the assignment term affected by the change request."
+                },
+                {
+                  "column_name": "event_kafka_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when the event was produced to Kafka."
+                },
+                {
+                  "column_name": "reason",
+                  "dtype": "string",
+                  "description": "Short code or category representing the reason for the change."
+                },
+                {
+                  "column_name": "is_internal",
+                  "dtype": "boolean",
+                  "description": "Boolean flag indicating whether the change request was initiated by an internal user or system."
+                },
+                {
+                  "column_name": "reason_explanation",
+                  "dtype": "string",
+                  "description": "Free-text explanation provided for why the change was requested."
+                },
+                {
+                  "column_name": "requested_by_normalized",
+                  "dtype": "string",
+                  "description": "Normalized form of the requester identifier for standardized matching and analysis."
+                },
+                {
+                  "column_name": "change_request_type",
+                  "dtype": "string",
+                  "description": "Category or type of the change request (for example, extend or shorten)."
+                }
+              ]
+            },
+            {
+              "table_name": "assignment_term_status_changed",
+              "column_info": [
+                {
+                  "column_name": "product_uuid",
+                  "dtype": "string",
+                  "description": "Identifier of the product associated with the assignment term."
+                },
+                {
+                  "column_name": "event_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp indicating when the status change event occurred."
+                },
+                {
+                  "column_name": "_meta",
+                  "dtype": "struct<event_uuid:string,event_time:string,application:string,origin:string,experiments:array<struct<id:string,variant:string>>,client_info:struct<asn:string,country:string,region:string,city:string,postal_code:string,latitude:string,longitude:string,ja4_fingerprint:string,is_desktop_viewer:boolean,is_mobile_viewer:boolean,is_smarttv_viewer:boolean,is_tablet_viewer:boolean,is_android_viewer:boolean,is_ios_viewer:boolean>,user:struct<uuid:string,roles:array<string>>>",
+                  "description": "Nested event metadata containing event identifiers, client information, and user details; may include PII such as user UUID and location."
+                },
+                {
+                  "column_name": "event_uuid",
+                  "dtype": "string",
+                  "description": "Unique identifier for the status-change event."
+                },
+                {
+                  "column_name": "vendor_uuid",
+                  "dtype": "string",
+                  "description": "Identifier of the vendor associated with the assignment term."
+                },
+                {
+                  "column_name": "event_kafka_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when the event was produced to Kafka."
+                },
+                {
+                  "column_name": "assignment_term_id",
+                  "dtype": "bigint",
+                  "description": "Numeric identifier of the assignment term whose status changed."
+                },
+                {
+                  "column_name": "status",
+                  "dtype": "string",
+                  "description": "New status value for the assignment term (for example: active, inactive)."
+                }
+              ]
+            },
+            {
+              "table_name": "bingads_performance_ads",
+              "column_info": [
+                {
+                  "column_name": "aggregation_date",
+                  "dtype": "string",
+                  "description": "Date when metrics were aggregated in YYYY-MM-DD format."
+                },
+                {
+                  "column_name": "return_on_ad_spend",
+                  "dtype": "double",
+                  "description": "Return on ad spend (ROAS) metric calculated for the ad."
+                },
+                {
+                  "column_name": "account_status",
+                  "dtype": "string",
+                  "description": "Operational status of the account."
+                },
+                {
+                  "column_name": "tracking_template",
+                  "dtype": "string",
+                  "description": "Tracking template applied to the ad's URL for parameter insertion."
+                },
+                {
+                  "column_name": "ad_type",
+                  "dtype": "string",
+                  "description": "Format or type of the ad (e.g., text, responsive)."
+                },
+                {
+                  "column_name": "crt",
+                  "dtype": "double",
+                  "description": "Click-through rate (clicks divided by impressions)."
+                },
+                {
+                  "column_name": "final_mobile_url",
+                  "dtype": "string",
+                  "description": "Final landing page URL optimized for mobile devices."
+                },
+                {
+                  "column_name": "cost_per_assist",
+                  "dtype": "double",
+                  "description": "Average cost incurred per assist action."
+                },
+                {
+                  "column_name": "conversion_rate",
+                  "dtype": "double",
+                  "description": "Ratio of conversions to clicks for the ad."
+                },
+                {
+                  "column_name": "custom_parameters",
+                  "dtype": "string",
+                  "description": "Custom tracking parameters associated with the ad."
+                },
+                {
+                  "column_name": "ad_group_status",
+                  "dtype": "string",
+                  "description": "Operational status of the ad group (e.g., enabled, paused)."
+                },
+                {
+                  "column_name": "top_vs_other",
+                  "dtype": "string",
+                  "description": "Indicator of ad position (top of page versus other positions)."
+                },
+                {
+                  "column_name": "campaign_status",
+                  "dtype": "string",
+                  "description": "Operational status of the campaign (e.g., active, paused)."
+                },
+                {
+                  "column_name": "bid_match_type",
+                  "dtype": "string",
+                  "description": "Bid match type used for matching bids (e.g., exact, phrase)."
+                },
+                {
+                  "column_name": "network",
+                  "dtype": "string",
+                  "description": "Advertising network where the ad was displayed."
+                },
+                {
+                  "column_name": "spend",
+                  "dtype": "double",
+                  "description": "Total advertising spend for the ad during the aggregation period."
+                },
+                {
+                  "column_name": "campaign_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the campaign containing the ad."
+                },
+                {
+                  "column_name": "revenue_per_assist",
+                  "dtype": "double",
+                  "description": "Revenue attributed per assist action."
+                },
+                {
+                  "column_name": "revenue_per_conversion",
+                  "dtype": "double",
+                  "description": "Revenue attributed per conversion."
+                },
+                {
+                  "column_name": "ad_id",
+                  "dtype": "bigint",
+                  "description": "Unique identifier for the ad."
+                },
+                {
+                  "column_name": "assists",
+                  "dtype": "bigint",
+                  "description": "Number of assist actions contributing to conversions."
+                },
+                {
+                  "column_name": "average_cpc",
+                  "dtype": "double",
+                  "description": "Average cost per click for the ad."
+                },
+                {
+                  "column_name": "ad_distribution",
+                  "dtype": "string",
+                  "description": "Where the ad was shown (for example Search or Content networks)."
+                },
+                {
+                  "column_name": "delivery_match_type",
+                  "dtype": "string",
+                  "description": "Match type between the delivered ad and the target (e.g., exact, phrase)."
+                },
+                {
+                  "column_name": "conversions",
+                  "dtype": "bigint",
+                  "description": "Number of conversions attributed to the ad."
+                },
+                {
+                  "column_name": "ad_group_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the ad group containing the ad."
+                },
+                {
+                  "column_name": "account_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the advertiser account; may identify an individual or business."
+                },
+                {
+                  "column_name": "impressions",
+                  "dtype": "bigint",
+                  "description": "Number of times the ad was shown."
+                },
+                {
+                  "column_name": "destination_url",
+                  "dtype": "string",
+                  "description": "Destination URL users land on when clicking the ad."
+                },
+                {
+                  "column_name": "currency_code",
+                  "dtype": "string",
+                  "description": "ISO currency code used for monetary metrics."
+                },
+                {
+                  "column_name": "clicks",
+                  "dtype": "bigint",
+                  "description": "Number of clicks the ad received."
+                },
+                {
+                  "column_name": "cost_per_conversion",
+                  "dtype": "double",
+                  "description": "Average cost paid for each conversion."
+                },
+                {
+                  "column_name": "device_os",
+                  "dtype": "string",
+                  "description": "Operating system of the device where the ad was served."
+                },
+                {
+                  "column_name": "revenue",
+                  "dtype": "double",
+                  "description": "Revenue attributed to the ad's conversions."
+                },
+                {
+                  "column_name": "ad_status",
+                  "dtype": "string",
+                  "description": "Operational status of the ad (e.g., enabled, paused)."
+                },
+                {
+                  "column_name": "language",
+                  "dtype": "string",
+                  "description": "Language targeting or detected language for the impression."
+                },
+                {
+                  "column_name": "device_type",
+                  "dtype": "string",
+                  "description": "Type of device (e.g., mobile, desktop, tablet)."
+                },
+                {
+                  "column_name": "final_url",
+                  "dtype": "string",
+                  "description": "Final landing page URL after any redirects."
+                },
+                {
+                  "column_name": "display_url",
+                  "dtype": "string",
+                  "description": "URL displayed in the ad creative."
+                },
+                {
+                  "column_name": "final_app_url",
+                  "dtype": "string",
+                  "description": "Final app deep link URL used after click-through."
+                }
+              ]
+            },
+            {
+              "table_name": "bingads_performance_campaigns",
+              "column_info": [
+                {
+                  "column_name": "revenue_per_assist",
+                  "dtype": "double",
+                  "description": "Average revenue attributed to each assist interaction."
+                },
+                {
+                  "column_name": "currency_code",
+                  "dtype": "string",
+                  "description": "ISO 4217 currency code used for monetary metrics in this row."
+                },
+                {
+                  "column_name": "impressions",
+                  "dtype": "bigint",
+                  "description": "Total number of times campaign ads were shown."
+                },
+                {
+                  "column_name": "ad_distribution",
+                  "dtype": "string",
+                  "description": "Channel or placement type where the ad was distributed (e.g., Search, Content)."
+                },
+                {
+                  "column_name": "account_status",
+                  "dtype": "string",
+                  "description": "Operational status of the advertiser account (e.g., active, paused, suspended)."
+                },
+                {
+                  "column_name": "aggregation_date",
+                  "dtype": "string",
+                  "description": "Date representing when metrics were aggregated for this row."
+                },
+                {
+                  "column_name": "delivery_match_type",
+                  "dtype": "string",
+                  "description": "Type of keyword match used for ad delivery (e.g., exact, phrase, broad)."
+                },
+                {
+                  "column_name": "assists",
+                  "dtype": "bigint",
+                  "description": "Count of assist interactions that contributed to conversions."
+                },
+                {
+                  "column_name": "cost_per_assist",
+                  "dtype": "double",
+                  "description": "Average cost associated with each assist interaction."
+                },
+                {
+                  "column_name": "tracking_template",
+                  "dtype": "string",
+                  "description": "Campaign-level tracking URL template used for click tracking; may contain query parameters."
+                },
+                {
+                  "column_name": "device_os",
+                  "dtype": "string",
+                  "description": "Operating system of the device where the ad was served."
+                },
+                {
+                  "column_name": "return_on_ad_spend",
+                  "dtype": "double",
+                  "description": "Return on ad spend (ROAS), indicating revenue generated per unit of spend."
+                },
+                {
+                  "column_name": "clicks",
+                  "dtype": "bigint",
+                  "description": "Total number of clicks recorded for the campaign."
+                },
+                {
+                  "column_name": "network",
+                  "dtype": "string",
+                  "description": "Advertising network or channel where the ad appeared (e.g., Search, Display)."
+                },
+                {
+                  "column_name": "revenue",
+                  "dtype": "double",
+                  "description": "Total revenue attributed to the campaign for the reporting period."
+                },
+                {
+                  "column_name": "account_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the advertiser account in Bing Ads."
+                },
+                {
+                  "column_name": "campaign_id",
+                  "dtype": "bigint",
+                  "description": "Unique identifier for the advertising campaign."
+                },
+                {
+                  "column_name": "crt",
+                  "dtype": "double",
+                  "description": "Click-through rate: clicks divided by impressions."
+                },
+                {
+                  "column_name": "average_cpc",
+                  "dtype": "double",
+                  "description": "Average cost per click for the campaign."
+                },
+                {
+                  "column_name": "spend",
+                  "dtype": "double",
+                  "description": "Total advertising spend for the campaign during the reporting period."
+                },
+                {
+                  "column_name": "device_type",
+                  "dtype": "string",
+                  "description": "Type of device where the ad was displayed (e.g., Desktop, Mobile, Tablet)."
+                },
+                {
+                  "column_name": "conversion_rate",
+                  "dtype": "double",
+                  "description": "Rate of conversions relative to the chosen denominator (commonly clicks)."
+                },
+                {
+                  "column_name": "conversions",
+                  "dtype": "bigint",
+                  "description": "Number of conversions attributed to the campaign."
+                },
+                {
+                  "column_name": "revenue_per_conversion",
+                  "dtype": "double",
+                  "description": "Average revenue attributed to each conversion."
+                },
+                {
+                  "column_name": "bid_match_type",
+                  "dtype": "string",
+                  "description": "Bid match type applied for campaign bidding."
+                },
+                {
+                  "column_name": "cost_per_conversion",
+                  "dtype": "double",
+                  "description": "Average cost incurred for each conversion."
+                },
+                {
+                  "column_name": "campaign_status",
+                  "dtype": "string",
+                  "description": "Operational status of the campaign (e.g., enabled, paused, deleted)."
+                },
+                {
+                  "column_name": "top_vs_other",
+                  "dtype": "string",
+                  "description": "Placement grouping indicating top-of-page positions versus other placements."
+                },
+                {
+                  "column_name": "custom_parameters",
+                  "dtype": "string",
+                  "description": "Custom campaign-level parameters used for tracking or reporting."
+                }
+              ]
+            },
+            {
+              "table_name": "contingent_changed",
+              "column_info": [
+                {
+                  "column_name": "assignment_term_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the assignment term related to this contingent change."
+                },
+                {
+                  "column_name": "_meta",
+                  "dtype": "struct<event_uuid:string,event_time:string,application:string,origin:string,experiments:array<struct<id:string,variant:string>>,client_info:struct<asn:string,country:string,region:string,city:string,postal_code:string,latitude:string,longitude:string,ja4_fingerprint:string,is_desktop_viewer:boolean,is_mobile_viewer:boolean,is_smarttv_viewer:boolean,is_tablet_viewer:boolean,is_android_viewer:boolean,is_ios_viewer:boolean>,user:struct<uuid:string,roles:array<string>>>",
+                  "description": "Nested metadata containing event context, client_info (location, device), experiments, and user details; may include user identifiers and location fields."
+                },
+                {
+                  "column_name": "event_kafka_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when the event was written to Kafka or ingested into the pipeline."
+                },
+                {
+                  "column_name": "event_uuid",
+                  "dtype": "string",
+                  "description": "Unique identifier for the event instance."
+                },
+                {
+                  "column_name": "affiliated_group_uuid",
+                  "dtype": "string",
+                  "description": "UUID of the affiliated group or organization associated with the contingent."
+                },
+                {
+                  "column_name": "contingent_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the contingent entity affected by the change."
+                },
+                {
+                  "column_name": "event_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Original timestamp when the event occurred."
+                }
+              ]
+            },
+            {
+              "table_name": "digital_matching_service_providers_offered",
+              "column_info": [
+                {
+                  "column_name": "device",
+                  "dtype": "struct<user_agent:string,screen_width:int,screen_height:int,viewport_width:int,viewport_height:int,is_touch:boolean,connection_type:string,language_code:string>",
+                  "description": "Device and browser attributes (user agent, screen and viewport dimensions, touch capability, connection type, language)."
+                },
+                {
+                  "column_name": "cms_data",
+                  "dtype": "struct<experiment_id:int,variant_id:int,page_id:int,revision_id:int,targeting_preset_id:int,url_node_id:int,root_node_id:int,form_id:int,experiments:array<struct<id:string,name:string,version_id:string,version_name:string>>,variants:array<struct<id:string,name:string,version_id:string,version_name:string>>>",
+                  "description": "Content management system metadata including experiment, variant, page and form identifiers."
+                },
+                {
+                  "column_name": "event_uuid",
+                  "dtype": "string",
+                  "description": "Unique identifier for the event record."
+                },
+                {
+                  "column_name": "event_kafka_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when the event was produced to Kafka or the ingestion system."
+                },
+                {
+                  "column_name": "page",
+                  "dtype": "struct<url:string,referer:string,type:string,language_code:string,country_code:string,product_id:string,ref:string,source:string>",
+                  "description": "Page-level details such as URL, referer, content type, language and product identifiers."
+                },
+                {
+                  "column_name": "google_analytics",
+                  "dtype": "struct<_ga:string,_gid:string>",
+                  "description": "Google Analytics client identifiers (for example _ga and _gid) used for session and client tracking."
+                },
+                {
+                  "column_name": "is_internal",
+                  "dtype": "boolean",
+                  "description": "Flag indicating whether the event originated from an internal source."
+                },
+                {
+                  "column_name": "visitor_id",
+                  "dtype": "string",
+                  "description": "Persistent visitor identifier used to link events to the same user across sessions."
+                },
+                {
+                  "column_name": "offered_assignment_term_ids",
+                  "dtype": "array<bigint>",
+                  "description": "Array of assignment term identifiers associated with the offered service."
+                },
+                {
+                  "column_name": "event_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Canonical timestamp representing when the event occurred in the system."
+                },
+                {
+                  "column_name": "_meta",
+                  "dtype": "struct<event_uuid:string,event_time:string,application:string,origin:string,experiments:array<struct<id:string,variant:string>>,client_info:struct<asn:string,country:string,region:string,city:string,postal_code:string,latitude:string,longitude:string,ja4_fingerprint:string,is_desktop_viewer:boolean,is_mobile_viewer:boolean,is_smarttv_viewer:boolean,is_tablet_viewer:boolean,is_android_viewer:boolean,is_ios_viewer:boolean>,user:struct<uuid:string,roles:array<string>>>",
+                  "description": "Nested metadata including event routing, client_info (location, ja4_fingerprint) and user uuid/roles; may contain personal or sensitive identifiers."
+                },
+                {
+                  "column_name": "product_request_uuid",
+                  "dtype": "string",
+                  "description": "Identifier for the related product request transaction."
+                },
+                {
+                  "column_name": "client_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp recorded by the client when the event occurred."
+                }
+              ]
+            },
+            {
+              "table_name": "digital_matching_service_providers_selected",
+              "column_info": [
+                {
+                  "column_name": "page",
+                  "dtype": "struct<url:string,referer:string,type:string,language_code:string,country_code:string,product_id:string,ref:string,source:string>",
+                  "description": "Page metadata including URL, referer, content type, language code and product/reference identifiers."
+                },
+                {
+                  "column_name": "event_kafka_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp indicating when the event was produced to Kafka."
+                },
+                {
+                  "column_name": "is_internal",
+                  "dtype": "boolean",
+                  "description": "Boolean flag indicating whether the provider or event is internal to the organization."
+                },
+                {
+                  "column_name": "device",
+                  "dtype": "struct<user_agent:string,screen_width:int,screen_height:int,viewport_width:int,viewport_height:int,is_touch:boolean,connection_type:string,language_code:string>",
+                  "description": "Device and client details such as user agent, screen and viewport sizes, touch capability and connection type."
+                },
+                {
+                  "column_name": "cms_data",
+                  "dtype": "struct<experiment_id:int,variant_id:int,page_id:int,revision_id:int,targeting_preset_id:int,url_node_id:int,root_node_id:int,form_id:int,experiments:array<struct<id:string,name:string,version_id:string,version_name:string>>,variants:array<struct<id:string,name:string,version_id:string,version_name:string>>>",
+                  "description": "Content management system metadata about experiments, variants and page identifiers."
+                },
+                {
+                  "column_name": "client_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp recorded on the client at event creation."
+                },
+                {
+                  "column_name": "offered_assignment_term_ids",
+                  "dtype": "array<bigint>",
+                  "description": "Array of assignment term IDs that were offered to the user."
+                },
+                {
+                  "column_name": "visitor_id",
+                  "dtype": "string",
+                  "description": "Persistent or anonymous visitor identifier for the session; may be linkable to a person."
+                },
+                {
+                  "column_name": "product_request_uuid",
+                  "dtype": "string",
+                  "description": "Identifier for the product request associated with the event."
+                },
+                {
+                  "column_name": "_meta",
+                  "dtype": "struct<event_uuid:string,event_time:string,application:string,origin:string,experiments:array<struct<id:string,variant:string>>,client_info:struct<asn:string,country:string,region:string,city:string,postal_code:string,latitude:string,longitude:string,ja4_fingerprint:string,is_desktop_viewer:boolean,is_mobile_viewer:boolean,is_smarttv_viewer:boolean,is_tablet_viewer:boolean,is_android_viewer:boolean,is_ios_viewer:boolean>,user:struct<uuid:string,roles:array<string>>>",
+                  "description": "Envelope with enriched event metadata including client info (location, fingerprint) and user sub-structure which may contain user UUIDs."
+                },
+                {
+                  "column_name": "event_uuid",
+                  "dtype": "string",
+                  "description": "Unique identifier for this specific event record."
+                },
+                {
+                  "column_name": "event_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when the event occurred."
+                },
+                {
+                  "column_name": "selected_assignment_term_ids",
+                  "dtype": "array<bigint>",
+                  "description": "Array of assignment term IDs that were selected by the user."
+                },
+                {
+                  "column_name": "google_analytics",
+                  "dtype": "struct<_ga:string,_gid:string>",
+                  "description": "Google Analytics identifiers (_ga, _gid) associated with the session; can be used to identify users."
+                }
+              ]
+            },
+            {
+              "table_name": "dim_bingads_accounts",
+              "column_info": [
+                {
+                  "column_name": "sold_to_payment_instrument_id",
+                  "dtype": "bigint",
+                  "description": "Identifier of the payment instrument used for purchases for this account."
+                },
+                {
+                  "column_name": "parent_customer_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the parent customer account, if applicable."
+                },
+                {
+                  "column_name": "currency_code",
+                  "dtype": "string",
+                  "description": "ISO currency code used by the account (e.g., USD)."
+                },
+                {
+                  "column_name": "payment_method_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the payment method linked to the account."
+                },
+                {
+                  "column_name": "number",
+                  "dtype": "string",
+                  "description": "Account number assigned by Bing Ads."
+                },
+                {
+                  "column_name": "bill_to_customer_id",
+                  "dtype": "bigint",
+                  "description": "Identifier of the customer billed for this account."
+                },
+                {
+                  "column_name": "account_financial_status",
+                  "dtype": "string",
+                  "description": "Financial status of the account (e.g., billed, delinquent)."
+                },
+                {
+                  "column_name": "language",
+                  "dtype": "string",
+                  "description": "Default language setting for the account (e.g., en)."
+                },
+                {
+                  "column_name": "last_modified_by_user_id",
+                  "dtype": "bigint",
+                  "description": "Identifier of the user who last modified the account record."
+                },
+                {
+                  "column_name": "last_modified_time",
+                  "dtype": "string",
+                  "description": "Timestamp of the last modification to the account (ISO formatted string)."
+                },
+                {
+                  "column_name": "is_archived",
+                  "dtype": "boolean",
+                  "description": "Boolean flag indicating whether the account is archived."
+                },
+                {
+                  "column_name": "primary_user_id",
+                  "dtype": "bigint",
+                  "description": "Primary user identifier associated with the account."
+                },
+                {
+                  "column_name": "id",
+                  "dtype": "bigint",
+                  "description": "Primary account identifier."
+                },
+                {
+                  "column_name": "auto_tag_type",
+                  "dtype": "string",
+                  "description": "Auto-tagging configuration applied to the account."
+                },
+                {
+                  "column_name": "snapshot_timestamp",
+                  "dtype": "timestamp",
+                  "description": "ETL snapshot timestamp when this record was captured."
+                },
+                {
+                  "column_name": "name",
+                  "dtype": "string",
+                  "description": "Display name of the account used in reporting and UIs."
+                },
+                {
+                  "column_name": "account_life_cycle_status",
+                  "dtype": "string",
+                  "description": "Lifecycle status of the account (e.g., active, suspended)."
+                },
+                {
+                  "column_name": "time_zone",
+                  "dtype": "string",
+                  "description": "Account time zone identifier used for reporting and scheduling."
+                },
+                {
+                  "column_name": "pause_reason",
+                  "dtype": "int",
+                  "description": "Numeric code indicating the reason the account is paused."
+                }
+              ]
+            },
+            {
+              "table_name": "dim_bingads_adgroups",
+              "column_info": [
+                {
+                  "column_name": "tracking_url_template",
+                  "dtype": "string",
+                  "description": "Template used to construct tracking URLs for clicks."
+                },
+                {
+                  "column_name": "bidding_scheme",
+                  "dtype": "string",
+                  "description": "Bidding scheme or strategy applied to the ad group."
+                },
+                {
+                  "column_name": "network",
+                  "dtype": "string",
+                  "description": "Advertising network where the ad group is served (e.g., Search, Content)."
+                },
+                {
+                  "column_name": "ad_schedule_use_searcher_time_zone",
+                  "dtype": "boolean",
+                  "description": "Flag indicating whether ad schedule uses the searcher's time zone."
+                },
+                {
+                  "column_name": "settings",
+                  "dtype": "array<string>",
+                  "description": "Array of additional ad group settings, flags, or options."
+                },
+                {
+                  "column_name": "language",
+                  "dtype": "string",
+                  "description": "Language targeting code for the ad group (e.g., en, fr)."
+                },
+                {
+                  "column_name": "account_id",
+                  "dtype": "bigint",
+                  "description": "Identifier of the account that owns the ad group; may identify the account holder."
+                },
+                {
+                  "column_name": "status",
+                  "dtype": "string",
+                  "description": "Current lifecycle status of the ad group (e.g., Active, Paused)."
+                },
+                {
+                  "column_name": "start_date",
+                  "dtype": "string",
+                  "description": "Start date when the ad group becomes active (ISO or YYYY-MM-DD)."
+                },
+                {
+                  "column_name": "end_date",
+                  "dtype": "string",
+                  "description": "End date when the ad group stops being active (ISO or YYYY-MM-DD)."
+                },
+                {
+                  "column_name": "privacy_status",
+                  "dtype": "string",
+                  "description": "Privacy or visibility setting for the ad group."
+                },
+                {
+                  "column_name": "customer_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the customer associated with the ad group; may identify a person or organization."
+                },
+                {
+                  "column_name": "cpc_bid",
+                  "dtype": "double",
+                  "description": "Default cost-per-click bid configured for the ad group."
+                },
+                {
+                  "column_name": "url_custom_parameters",
+                  "dtype": "array<struct<_1:string,_2:string>>",
+                  "description": "Custom URL parameter key/value pairs used for click tracking."
+                },
+                {
+                  "column_name": "final_url_suffix",
+                  "dtype": "string",
+                  "description": "Suffix appended to final landing page URLs for tracking purposes."
+                },
+                {
+                  "column_name": "name",
+                  "dtype": "string",
+                  "description": "Display name of the ad group."
+                },
+                {
+                  "column_name": "id",
+                  "dtype": "bigint",
+                  "description": "Unique identifier for the ad group record."
+                },
+                {
+                  "column_name": "audience_ads_bid_adjustment",
+                  "dtype": "int",
+                  "description": "Bid adjustment value applied for audience-targeted bids."
+                },
+                {
+                  "column_name": "campaign_id",
+                  "dtype": "bigint",
+                  "description": "Identifier of the parent campaign that contains this ad group."
+                },
+                {
+                  "column_name": "snapshot_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp indicating when this snapshot of the record was created."
+                }
+              ]
+            },
+            {
+              "table_name": "dim_bingads_ads",
+              "column_info": [
+                {
+                  "column_name": "ad_format_preference",
+                  "dtype": "string",
+                  "description": "Preferred ad format setting for this ad."
+                },
+                {
+                  "column_name": "id",
+                  "dtype": "bigint",
+                  "description": "Unique identifier for the ad record."
+                },
+                {
+                  "column_name": "url_custom_parameters",
+                  "dtype": "array<struct<_1:string,_2:string>>",
+                  "description": "Array of key-value pairs defining custom URL parameter substitutions for tracking."
+                },
+                {
+                  "column_name": "editorial_status",
+                  "dtype": "string",
+                  "description": "Editorial review status indicating compliance with platform policies."
+                },
+                {
+                  "column_name": "final_urls",
+                  "dtype": "array<string>",
+                  "description": "Array of final landing page URLs for the ad."
+                },
+                {
+                  "column_name": "account_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the account that owns the ad."
+                },
+                {
+                  "column_name": "device_preference",
+                  "dtype": "bigint",
+                  "description": "Numeric code indicating device targeting preference (for example, mobile or desktop)."
+                },
+                {
+                  "column_name": "final_url_suffix",
+                  "dtype": "string",
+                  "description": "Suffix appended to final URLs for tracking parameters or URL templates."
+                },
+                {
+                  "column_name": "tracking_url_template",
+                  "dtype": "string",
+                  "description": "Template used to generate tracking URLs for clicks on the ad."
+                },
+                {
+                  "column_name": "type",
+                  "dtype": "string",
+                  "description": "Classification or subtype of the ad (e.g., expanded text, responsive)."
+                },
+                {
+                  "column_name": "final_app_urls",
+                  "dtype": "array<string>",
+                  "description": "Array of final app store URLs used for app install creatives."
+                },
+                {
+                  "column_name": "status",
+                  "dtype": "string",
+                  "description": "Operational status of the ad (e.g., enabled, paused, removed)."
+                },
+                {
+                  "column_name": "ad_group_id",
+                  "dtype": "bigint",
+                  "description": "Identifier of the ad group that contains the ad."
+                },
+                {
+                  "column_name": "final_mobile_urls",
+                  "dtype": "array<string>",
+                  "description": "Array of mobile-specific landing page URLs associated with the ad."
+                },
+                {
+                  "column_name": "campaign_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the campaign that contains the ad."
+                },
+                {
+                  "column_name": "snapshot_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when this ad record was captured or last synchronized."
+                },
+                {
+                  "column_name": "customer_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the customer or advertiser associated with the ad."
+                }
+              ]
+            },
+            {
+              "table_name": "dim_bingads_campaigns",
+              "column_info": [
+                {
+                  "column_name": "name",
+                  "dtype": "string",
+                  "description": "Display name of the campaign."
+                },
+                {
+                  "column_name": "settings",
+                  "dtype": "array<string>",
+                  "description": "Array of campaign-level settings stored as strings (key/value or option names)."
+                },
+                {
+                  "column_name": "campaign_type",
+                  "dtype": "array<string>",
+                  "description": "Array of campaign type tags or categories (e.g., Search, Shopping)."
+                },
+                {
+                  "column_name": "status",
+                  "dtype": "string",
+                  "description": "Current status of the campaign (e.g., Active, Paused, Deleted)."
+                },
+                {
+                  "column_name": "snapshot_timestamp",
+                  "dtype": "timestamp",
+                  "description": "Timestamp when this campaign snapshot was captured."
+                },
+                {
+                  "column_name": "budget_type",
+                  "dtype": "string",
+                  "description": "Type of budget allocation for the campaign (e.g., Daily, Monthly, Shared)."
+                },
+                {
+                  "column_name": "time_zone",
+                  "dtype": "string",
+                  "description": "Time zone configured for the campaign (e.g., 'UTC', 'Pacific Standard Time')."
+                },
+                {
+                  "column_name": "daily_budget",
+                  "dtype": "double",
+                  "description": "Daily budget allocated to the campaign in account currency."
+                },
+                {
+                  "column_name": "budget_id",
+                  "dtype": "bigint",
+                  "description": "Identifier for the budget object associated with the campaign."
+                },
+                {
+                  "column_name": "id",
+                  "dtype": "bigint",
+                  "description": "Unique numeric identifier for the campaign."
+                },
+                {
+                  "column_name": "audience_ads_bid_adjustment",
+                  "dtype": "int",
+                  "description": "Bid adjustment integer applied for audience targeting (e.g., percent or flag)."
+                },
+                {
+                  "column_name": "account_id",
+                  "dtype": "bigint",
+                  "description": "Numeric identifier for the associated advertising account."
+                },
+                {
+                  "column_name": "tracking_url_template",
+                  "dtype": "string",
+                  "description": "Template URL used for tracking clicks and campaign performance."
+                },
+                {
+                  "column_name": "bidding_scheme",
+                  "dtype": "string",
+                  "description": "Bidding strategy or scheme applied to the campaign."
+                },
+                {
+                  "column_name": "languages",
+                  "dtype": "array<string>",
+                  "description": "Array of language codes targeted by the campaign."
+                },
+                {
+                  "column_name": "customer_id",
+                  "dtype": "bigint",
+                  "description": "Numeric identifier for the customer or advertiser account."
+                }
+              ]
+            }
+      ]
+    }
+    ]}
+]

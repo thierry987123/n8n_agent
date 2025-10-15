@@ -12,7 +12,7 @@
 # git branch -M main
 
 # Add your remote and push
-# git remote add origin <git@github.com:username/n8n-demo.git>
+# git remote add origin <git@github.com:thierry987123/n8n-demo.git>
 # git add .
 # git commit -m "Initial commit"
 # git push -u origin main
