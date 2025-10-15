@@ -1,0 +1,70 @@
+version: "3.7"
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    # Bind mount for persistent local data
+    volumes:
+      - ./data:/home/node/.n8n
+      - ./uploads:/data
+    environment:
+      # Core service URL config
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=${N8N_PORT:-5678}
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - WEBHOOK_URL=${WEBHOOK_URL:-http://localhost:5678/}
+
+      # Timezone & telemetry
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE:-Asia/Ho_Chi_Minh}
+      - N8N_DIAGNOSTICS_ENABLED=${N8N_DIAGNOSTICS_ENABLED:-false}
+      - N8N_PERSONALIZATION_ENABLED=${N8N_PERSONALIZATION_ENABLED:-false}
+
+      # Execution options
+      - N8N_METRICS=${N8N_METRICS:-false}
+
+      # Local file access controls
+      - NODE_FUNCTION_ALLOW_EXTERNAL=${NODE_FUNCTION_ALLOW_EXTERNAL:-fs}
+      - N8N_READ_FILE_ALLOW_NAVIGATION=${N8N_READ_FILE_ALLOW_NAVIGATION:-true}
+      - N8N_ALLOWED_FILE_ACCESS=${N8N_ALLOWED_FILE_ACCESS:-/home/node/.n8n:/tmp:/data}
+      - N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES=${N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES:-false}
+
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5678/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+    # Restart policy for resilience
+    restart: unless-stopped
+
+    # In case you want to set user mappings, uncomment below
+    # user: "1000:1000"
+
+  agent:
+    build:
+      context: .
+      dockerfile: agent/Dockerfile
+    container_name: ai-agent
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${GEMINI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gemini-1.5-flash}
+      - SYSTEM_PROMPT=${SYSTEM_PROMPT:-You are a helpful assistant.}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+
+# Named volume alternative (instead of bind mount). If you prefer named volume, switch volumes above to `n8n_data:/home/node/.n8n` and enable this:
+# volumes:
+#   n8n_data:
+#     driver: local

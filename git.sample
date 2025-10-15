@@ -1,0 +1,18 @@
+# Local git configuration (sample). Copy commands and replace placeholders.
+
+# Inside the project directory
+# Initialize repo (if not already)
+# git init
+
+# Set your identity (local to this repo)
+# git config user.name "<Your Name>"
+# git config user.email "<your-email@example.com>"
+
+# Optional: set default branch name
+# git branch -M main
+
+# Add your remote and push
+# git remote add origin <git@github.com:username/n8n-demo.git>
+# git add .
+# git commit -m "Initial commit"
+# git push -u origin main
